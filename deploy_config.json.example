@@ -1,0 +1,7 @@
+{
+  "host": "host",
+  "username": "user",
+  "password": "password",
+  "port": 22,
+  "path": "/full/server/path/"
+}
