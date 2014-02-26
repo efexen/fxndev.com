@@ -52,6 +52,13 @@ module.exports = function(grunt) {
           showProgress: true
         }
       }
+    },
+    uncss: {
+      dist: {
+        files: {
+          'dist/css/cleaned.css': ['dist/index.html']
+        }
+      }
     }
   });
 
@@ -60,9 +67,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-include-bootstrap');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-uncss');
+
   grunt.loadNpmTasks('grunt-ssh');
 
-  grunt.registerTask('default', ['haml', 'uglify', 'include_bootstrap', 'cssmin']);
+  grunt.registerTask('default', ['haml', 'uglify', 'include_bootstrap', 'uncss', 'cssmin']);
   grunt.registerTask('deploy', ['default', 'sftp:deploy']);
 
 };
