@@ -31,6 +31,15 @@ module.exports = function(grunt) {
         }
       }
     },
+    cssmin: {
+      minify: {
+        expand: true,
+        cwd: 'dist/css/',
+        src: ['*.css', '!*.min.css'],
+        dest: 'dist/css/',
+        ext: '.min.css'
+      }
+    },
     sftp: {
       deploy: {
         files: {
@@ -50,9 +59,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-include-bootstrap');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-ssh');
 
-  grunt.registerTask('default', ['haml', 'uglify', 'include_bootstrap']);
+  grunt.registerTask('default', ['haml', 'uglify', 'include_bootstrap', 'cssmin']);
   grunt.registerTask('deploy', ['default', 'sftp:deploy']);
 
 };
