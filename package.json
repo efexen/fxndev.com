@@ -11,6 +11,7 @@
     "grunt-include-bootstrap": "~0.1.1",
     "grunt-ssh": "~0.10.0",
     "grunt-contrib-cssmin": "~0.8.0",
-    "grunt-uncss": "~0.2.0"
+    "grunt-uncss": "~0.2.0",
+    "grunt-contrib-clean": "~0.6.0"
   }
 }

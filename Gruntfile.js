@@ -5,6 +5,7 @@ module.exports = function(grunt) {
     sshconfig: {
       'deploy_config': grunt.file.readJSON('deploy_config.json'),
     },
+    clean: ['temp', 'dist'],
     haml: {
       dist: {
         files: grunt.file.expandMapping(['src/*.haml'], 'dist/', {
@@ -27,14 +28,14 @@ module.exports = function(grunt) {
     include_bootstrap: {
       dist: {
         files: {
-          'dist/css/styles.css': 'src/less/manifest.less'
+          'temp/css/styles.css': 'src/less/manifest.less'
         }
       }
     },
     cssmin: {
       minify: {
         expand: true,
-        cwd: 'dist/css/',
+        cwd: 'temp/css/',
         src: ['*.css', '!*.min.css'],
         dest: 'dist/css/',
         ext: '.min.css'
@@ -56,7 +57,7 @@ module.exports = function(grunt) {
     uncss: {
       dist: {
         files: {
-          'dist/css/cleaned.css': ['dist/index.html']
+          'dist/css/styles.min.css': ['dist/index.html']
         }
       }
     }
@@ -68,10 +69,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-include-bootstrap');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-uncss');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.loadNpmTasks('grunt-ssh');
 
-  grunt.registerTask('default', ['haml', 'uglify', 'include_bootstrap', 'uncss', 'cssmin']);
+  grunt.registerTask('default', ['clean', 'haml', 'uglify', 'include_bootstrap', 'cssmin', 'uncss']);
   grunt.registerTask('deploy', ['default', 'sftp:deploy']);
 
 };
